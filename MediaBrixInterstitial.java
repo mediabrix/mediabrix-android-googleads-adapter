@@ -2,6 +2,7 @@ package com.mediabrix.admobtestapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.mediation.MediationAdRequest;
@@ -9,6 +10,10 @@ import com.google.android.gms.ads.mediation.customevent.CustomEventInterstitial;
 import com.google.android.gms.ads.mediation.customevent.CustomEventInterstitialListener;
 import com.mediabrix.android.api.IAdEventsListener;
 import com.mediabrix.android.api.MediabrixAPI;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by muhammad on 7/7/16.
  */
@@ -23,7 +28,20 @@ public class MediaBrixInterstitial implements CustomEventInterstitial, IAdEvents
     public void requestInterstitialAd(Context context, CustomEventInterstitialListener customEventInterstitialListener, String s, MediationAdRequest mediationAdRequest, Bundle bundle) {
         this.context = context;
         this.customEventInterstitialListener = customEventInterstitialListener;
-        MediabrixAPI.getInstance().initialize(this.context,baseURL,appID,this);
+        try {
+            JSONObject adMobparameter = new JSONObject(s);
+            appID = adMobparameter.has("appID") ? adMobparameter.getString("appID") : "";
+            zone = adMobparameter.has("zone") ? adMobparameter.getString("zone") : "";
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if(appID.isEmpty())
+            Log.d("MediaBrix-AdMob", "App Id is empty please add the appID to parameter");
+        if(zone.isEmpty())
+            Log.d("MediaBrix-AdMob", "Zone is empty please add the zone to parameter");
+
+        if(!appID.isEmpty() && !zone.isEmpty())
+            MediabrixAPI.getInstance().initialize(this.context,baseURL,appID,this);
     }
 
     @Override
