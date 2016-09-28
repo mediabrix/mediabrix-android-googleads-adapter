@@ -51,6 +51,8 @@ dependencies {
 ````@Override
     public void onResume() {
         super.onResume();
+        MediabrixAPI.setDebug(true); // This method prints out logs from the MediaBrix SDK.
+                                    //  To disable logs, set the method to false.
         MediabrixAPI.getInstance().onResume(getApplicationContext());
     }
 ````
