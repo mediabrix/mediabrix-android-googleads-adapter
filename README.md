@@ -44,7 +44,7 @@ dependencies {
       android:name="com.mediabrix.android.service.MediaBrixService" >
 </service> ``
 
-**Step 6:** In the activity that is requesting the interstitial ad add the following lines to your activity's ``onResume`` and ``onPause`` methods.
+**Step 5:** In the activity that is requesting the interstitial ad add the following lines to your activity's ``onResume`` and ``onPause`` methods.
 
 ````@Override
     public void onPause() {
