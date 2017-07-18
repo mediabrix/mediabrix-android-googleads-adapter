@@ -66,7 +66,7 @@ public class MediaBrixInterstitial implements CustomEventInterstitial, IAdEvents
 
     @Override
     public void onStarted(String s) {
-        MediabrixAPI.getInstance().load(context,zone,null);
+        MediabrixAPI.getInstance().load(context,zone);
     }
 
     @Override
