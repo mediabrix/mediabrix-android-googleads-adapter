@@ -51,7 +51,7 @@ public class MediaBrixInterstitial implements CustomEventInterstitial, IAdEvents
 
     @Override
     public void onDestroy() {
-        MediabrixAPI.getInstance().onDestroy(this.context);
+        
     }
 
     @Override
